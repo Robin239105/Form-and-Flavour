@@ -144,9 +144,9 @@ export function Nav({ onDark }) {
           ))}
         </nav>
         <div className="drawer-foot">
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://pinterest.com" target="_blank" rel="noreferrer">Pinterest</a>
-          <a href="mailto:hello@formandflavour.studio">Email</a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconInstagram s={16} /> Instagram</a>
+          <a href="https://pinterest.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconPinterest s={16} /> Pinterest</a>
+          <a href="mailto:hello@formandflavour.studio" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconMail s={16} /> Email</a>
         </div>
       </div>
     </>
@@ -183,10 +183,10 @@ export function Footer() {
           <div>
             <span className="label col-h">Elsewhere</span>
             <div className="footer-nav">
-              <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-              <a href="https://pinterest.com" target="_blank" rel="noreferrer">Pinterest</a>
-              <a href="mailto:hello@formandflavour.studio">hello@formandflavour.studio</a>
-              <Link to="/contact">Booking enquiries</Link>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconInstagram s={16} /> Instagram</a>
+              <a href="https://pinterest.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconPinterest s={16} /> Pinterest</a>
+              <a href="mailto:hello@formandflavour.studio" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconMail s={16} /> hello@formandflavour.studio</a>
+              <Link to="/contact" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><Arrow s={14} /> Booking enquiries</Link>
             </div>
           </div>
         </div>
