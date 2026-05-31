@@ -17,9 +17,9 @@
   --cream-3:     #e2e8f0;   /* Slate 200 - border and division lines */
   --cocoa:       #64748b;   /* Slate 500 - muted slate accent */
   --cocoa-deep:  #475569;   /* Slate 600 - dark slate for captions */
-  --terra:       #c2593f;   /* Terracotta / Rust accent - rich and warm */
-  --terra-deep:  #963d27;   /* Deep Terracotta for hover */
-  --terra-soft:  #e2875e;   /* Soft warm clay/copper for dark-theme highlights */
+  --terra:       #0f5132;   /* Deep Emerald / Forest Green brand color */
+  --terra-deep:  #0a3622;   /* Deep Forest Green for buttons/links hover */
+  --terra-soft:  #82cda2;   /* Sage / Mint green for highlights on dark backgrounds */
   --ink:         #0f172a;   /* Slate 900 - dark slate for maximum text readability */
   --ink-soft:    #475569;   /* Slate 600 - readable secondary text */
 
