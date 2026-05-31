@@ -9,19 +9,19 @@
 
 :root {
   /* ---- color ---- */
-  --plum:        #302c28;   /* deep espresso / warm charcoal */
-  --plum-deep:   #1f1d1a;   /* near-black warm */
-  --plum-soft:   #4a453f;   /* softer brown-grey */
-  --cream:       #f7f4ed;   /* warm oatmeal / linen */
-  --cream-2:     #ebe6db;   /* slightly deeper stone */
-  --cream-3:     #dfd8cb;   /* darker stone */
-  --cocoa:       #8c7c6b;   /* muted taupe */
-  --cocoa-deep:  #6b5e50;
-  --terra:       #b85d43;   /* warm rust / terracotta accent */
-  --terra-deep:  #94452e;
-  --terra-soft:  #d6846c;   /* soft clay */
-  --ink:         #1f1d1a;   /* solid warm dark text */
-  --ink-soft:    #5c554d;
+  --plum:        #1e293b;   /* Slate 800 - dark charcoal with blue undertone */
+  --plum-deep:   #0f172a;   /* Slate 900 - deep slate for dark sections */
+  --plum-soft:   #334155;   /* Slate 700 - medium slate gray */
+  --cream:       #f8fafc;   /* Slate 50 - clean, bright off-white light background */
+  --cream-2:     #f1f5f9;   /* Slate 100 - secondary light background for contrast */
+  --cream-3:     #e2e8f0;   /* Slate 200 - border and division lines */
+  --cocoa:       #64748b;   /* Slate 500 - muted slate accent */
+  --cocoa-deep:  #475569;   /* Slate 600 - dark slate for captions */
+  --terra:       #4f46e5;   /* Indigo 600 - premium cobalt/indigo main brand color */
+  --terra-deep:  #3730a3;   /* Indigo 800 - dark indigo for buttons/links hover */
+  --terra-soft:  #818cf8;   /* Indigo 400 - soft indigo for dark-theme highlights */
+  --ink:         #0f172a;   /* Slate 900 - dark slate for maximum text readability */
+  --ink-soft:    #475569;   /* Slate 600 - readable secondary text */
 
   /* ---- type ---- */
   --serif: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif; /* Using geometric sans for headings */
