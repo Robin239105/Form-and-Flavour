@@ -4,28 +4,28 @@
 
 /* ============================================================
    FORM & FLAVOUR STUDIO — editorial design system
-   Deep aubergine · warm bone · cocoa · terracotta
+   Deep forest · warm stone · amber · olive
    ============================================================ */
 
 :root {
   /* ---- color ---- */
-  --plum:        #3a2030;   /* deep aubergine */
-  --plum-deep:   #261019;   /* near-black plum */
-  --plum-soft:   #4f2c3f;
-  --cream:       #f5efe2;   /* bone / warm cream */
-  --cream-2:     #ece3d2;   /* slightly deeper bone */
-  --cream-3:     #e2d6c0;
-  --cocoa:       #6b5240;   /* cocoa brown */
-  --cocoa-deep:  #4a3526;
-  --terra:       #c25a36;   /* terracotta accent */
-  --terra-deep:  #a8482a;
-  --terra-soft:  #d98a5f;
-  --ink:         #2a1620;   /* primary text on cream */
-  --ink-soft:    #5c4350;
+  --plum:        #1e3a1e;   /* deep forest green */
+  --plum-deep:   #1a2e1a;   /* near-black forest */
+  --plum-soft:   #2d4f2d;
+  --cream:       #f4f0e8;   /* warm stone */
+  --cream-2:     #ebe5d8;   /* slightly deeper stone */
+  --cream-3:     #dfd6c5;
+  --cocoa:       #6b5e3e;   /* warm olive-brown */
+  --cocoa-deep:  #4a4028;
+  --terra:       #c89132;   /* warm amber/gold */
+  --terra-deep:  #a87820;
+  --terra-soft:  #ddb05a;
+  --ink:         #1c2a1c;   /* primary text on stone */
+  --ink-soft:    #4a5a40;
 
   /* ---- type ---- */
-  --serif: "Bodoni Moda", Georgia, "Times New Roman", serif;
-  --sans:  "Archivo", system-ui, -apple-system, sans-serif;
+  --serif: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --sans:  "Inter", system-ui, -apple-system, sans-serif;
 
   /* ---- layout ---- */
   --maxw: 1320px;
@@ -47,7 +47,7 @@ body {
   font-family: var(--sans);
   font-size: 17px;
   line-height: 1.7;
-  font-weight: 360;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -100,7 +100,7 @@ p { margin: 0; text-wrap: pretty; }
 .lead {
   font-size: clamp(1.15rem, 1.9vw, 1.6rem);
   line-height: 1.5;
-  font-weight: 360;
+  font-weight: 400;
   color: var(--ink-soft);
 }
 
@@ -168,7 +168,7 @@ p { margin: 0; text-wrap: pretty; }
 }
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(38, 16, 25, 0.16);
+  box-shadow: 0 12px 28px rgba(26, 46, 26, 0.16);
 }
 .btn .arrow { transition: transform .4s var(--ease); }
 .btn:hover .arrow { transform: translateX(5px); }
@@ -177,7 +177,7 @@ p { margin: 0; text-wrap: pretty; }
 .btn-terra:hover {
   --bg: var(--terra-deep);
   border-color: var(--terra-deep);
-  box-shadow: 0 12px 28px rgba(194, 90, 54, 0.28);
+  box-shadow: 0 12px 28px rgba(200, 145, 50, 0.28);
 }
 
 .btn-ghost {
@@ -236,7 +236,7 @@ p { margin: 0; text-wrap: pretty; }
   transition: padding .5s var(--ease);
 }
 .nav.scrolled {
-  background: rgba(38, 16, 25, 0.88); /* elegant deep plum glass */
+  background: rgba(26, 46, 26, 0.88); /* elegant deep forest glass */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(245, 239, 226, 0.08);
@@ -517,7 +517,7 @@ p { margin: 0; text-wrap: pretty; }
   top: 35%; left: 15%;
   width: clamp(300px, 45vw, 650px);
   height: clamp(300px, 45vw, 650px);
-  background: radial-gradient(circle, rgba(194, 90, 54, 0.14) 0%, transparent 68%);
+  background: radial-gradient(circle, rgba(200, 145, 50, 0.14) 0%, transparent 68%);
   z-index: -2;
   pointer-events: none;
   filter: blur(44px);
@@ -553,7 +553,7 @@ p { margin: 0; text-wrap: pretty; }
   background: linear-gradient(135deg, var(--terra-soft) 18%, var(--terra) 82%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 45px rgba(217, 138, 95, 0.16);
+  text-shadow: 0 0 45px rgba(221, 176, 90, 0.16);
 }
 .line-mask { display: block; overflow: hidden; padding-bottom: 0.06em; }
 .line-in {
@@ -588,7 +588,7 @@ p { margin: 0; text-wrap: pretty; }
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 75% 25%, rgba(217, 138, 95, 0.16), transparent 58%);
+  background: radial-gradient(circle at 75% 25%, rgba(221, 176, 90, 0.16), transparent 58%);
   z-index: 1;
   pointer-events: none;
   mix-blend-mode: color-dodge;
@@ -670,16 +670,16 @@ p { margin: 0; text-wrap: pretty; }
   display: flex;
   flex-direction: column;
   padding: 14px;
-  background: rgba(107, 82, 64, 0.02);
-  border: 1px solid rgba(107, 82, 64, 0.05);
+  background: rgba(107, 94, 62, 0.02);
+  border: 1px solid rgba(107, 94, 62, 0.05);
   border-radius: 14px;
   transition: transform .45s var(--ease), background .45s var(--ease), border-color .45s var(--ease), box-shadow .45s var(--ease);
 }
 .svc-card:hover {
   transform: translateY(-8px);
-  background: rgba(107, 82, 64, 0.04);
-  border-color: rgba(107, 82, 64, 0.15);
-  box-shadow: 0 16px 36px rgba(38, 16, 25, 0.05);
+  background: rgba(107, 94, 62, 0.04);
+  border-color: rgba(107, 94, 62, 0.15);
+  box-shadow: 0 16px 36px rgba(26, 46, 26, 0.05);
 }
 .svc-media {
   position: relative;
