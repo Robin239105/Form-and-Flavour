@@ -28,36 +28,76 @@ export function Home() {
     "Form & Flavour Studio — Crafted objects. Curated tastes.",
     "A multidisciplinary London craft studio: bespoke upholstered furniture, hand-painted chocolates, recipe development, and food tours & pub crawls."
   );
+
+  const heroRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const bg = hero.querySelector("[data-parallax]");
+    
+    let raf = 0, tx = 0, ty = 0, cx = 0, cy = 0;
+
+    const apply = () => {
+      cx += (tx - cx) * 0.08;
+      cy += (ty - cy) * 0.08;
+      if (bg) bg.style.transform = `scale(1.08) translate(${cx * 20}px, ${cy * 20}px)`;
+      raf = Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001 ? requestAnimationFrame(apply) : 0;
+    };
+
+    const onMove = (e) => {
+      if (reduce) return;
+      const r = hero.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width - 0.5;
+      ty = (e.clientY - r.top) / r.height - 0.5;
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+
+    hero.addEventListener("pointermove", onMove);
+    return () => {
+      hero.removeEventListener("pointermove", onMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <main>
-      <Nav />
+      <Nav onDark />
 
-      {/* HERO — Bento Box */}
-      <section className="hero-bento" aria-label="Introduction">
-        <div className="hero-bento-grid wrap-wide">
-          <div className="bento-card bento-intro">
-            <span className="label hero-tag">Form &amp; Flavour Studio</span>
-            <h1 className="hero-title">
-              Crafted objects.<br /><span className="serif-italic" style={{ color: "var(--terra)" }}>Curated tastes.</span>
-            </h1>
-            <p className="hero-lead lead">
-              One London studio working across four disciplines. Each made slowly, by hand, with the same eye.
-            </p>
-            <div className="hero-actions">
-              <Link to="/contact" className="btn btn-terra">Start a project <Arrow /></Link>
-            </div>
+      {/* HERO — Cinematic Glassmorphism */}
+      <section className="hero-cinematic" aria-label="Introduction" ref={heroRef}>
+        <div className="cinematic-bg" data-parallax>
+          <SmartImage src={CRAFTS[0].img} alt="Form & Flavour Studio" />
+        </div>
+        <div className="cinematic-overlay" />
+
+        <div className="cinematic-content wrap-wide">
+          <div className="cinematic-title-group">
+            <Reveal as="span" className="label hero-tag">Form &amp; Flavour Studio</Reveal>
+            <Reveal as="h1" className="cinematic-title" delay={200}>
+              Crafted<br /><span className="serif-italic">objects.</span>
+            </Reveal>
+            <Reveal as="h1" className="cinematic-title offset" delay={400}>
+              Curated<br /><span className="serif-italic">tastes.</span>
+            </Reveal>
           </div>
-          
-          {CRAFTS.map((c, i) => (
-            <Link to={c.to} key={c.to} className={`bento-card bento-craft bento-craft-${i}`}>
-              <SmartImage src={c.img} alt={c.nm} className="bento-bg" />
-              <div className="bento-overlay">
-                <span className="bento-num">{c.n}</span>
-                <h2 className="bento-name">{c.nm}</h2>
-                <span className="bento-explore">Explore <Arrow s={14} /></span>
-              </div>
-            </Link>
-          ))}
+
+          <Reveal className="cinematic-dock-wrapper" delay={800}>
+            <div className="glass-dock">
+              {CRAFTS.map((c, i) => (
+                <Link to={c.to} key={c.to} className="dock-item">
+                  <div className="dock-thumb">
+                    <SmartImage src={c.img} alt={c.nm} ratio="1/1" />
+                  </div>
+                  <div className="dock-info">
+                    <span className="dock-num">{c.n}</span>
+                    <span className="dock-name">{c.nm}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
