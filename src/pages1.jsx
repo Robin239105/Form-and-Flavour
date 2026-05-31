@@ -69,7 +69,7 @@ export function Home() {
       {/* HERO — Cinematic Glassmorphism */}
       <section className="hero-cinematic" aria-label="Introduction" ref={heroRef}>
         <div className="cinematic-bg" data-parallax>
-          <SmartImage src={CRAFTS[0].img} alt="Form & Flavour Studio" />
+          <SmartImage src={U("1618220179428-22790b461013", 1600)} alt="Form & Flavour Studio" />
         </div>
         <div className="cinematic-overlay" />
 
