@@ -22,97 +22,42 @@ import {
   CRAFTS
 } from "./data.js";
 
-function HeroSlideshow() {
-  const [idx, setIdx] = React.useState(0);
-  
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setIdx((prev) => (prev + 1) % CRAFTS.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <div className="hero-gallery-bgs">
-      {CRAFTS.map((c, i) => (
-        <div 
-          key={c.to} 
-          className={`hero-bg-layer ${i === idx ? "active" : ""}`}
-        >
-          <SmartImage src={c.img} alt={c.nm} />
-        </div>
-      ))}
-      <div className="hero-gallery-overlay" />
-    </div>
-  );
-}
-
-
 /* ---------- HOME ---------- */
 export function Home() {
   usePageMeta(
     "Form & Flavour Studio — Crafted objects. Curated tastes.",
     "A multidisciplinary London craft studio: bespoke upholstered furniture, hand-painted chocolates, recipe development, and food tours & pub crawls."
   );
-  const heroRef = React.useRef(null);
-  React.useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const bg = hero.querySelector("[data-parallax]");
-    const soft = hero.querySelector("[data-parallax-soft]");
-    const inner = hero.querySelector(".hero-copy");
-    let raf = 0, tx = 0, ty = 0, cx = 0, cy = 0;
-
-    const apply = () => {
-      cx += (tx - cx) * 0.08;
-      cy += (ty - cy) * 0.08;
-      if (bg) bg.style.transform = `scale(1.06) translate(${cx * 16}px, ${cy * 16}px)`;
-      if (soft) soft.style.transform = `translate(${cx * -10}px, ${cy * -7}px)`;
-      raf = Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001 ? requestAnimationFrame(apply) : 0;
-    };
-    const onMove = (e) => {
-      if (reduce) return;
-      const r = hero.getBoundingClientRect();
-      tx = (e.clientX - r.left) / r.width - 0.5;
-      ty = (e.clientY - r.top) / r.height - 0.5;
-      if (!raf) raf = requestAnimationFrame(apply);
-    };
-    // gentle scroll-driven drift + fade as you leave the hero
-    const onScroll = () => {
-      if (reduce || !inner) return;
-      const y = Math.min(window.scrollY, 620);
-      inner.style.setProperty("--scrolly", `${y * 0.16}px`);
-      inner.style.setProperty("--fade", String(Math.max(0, 1 - y / 540)));
-    };
-    hero.addEventListener("pointermove", onMove);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => {
-      hero.removeEventListener("pointermove", onMove);
-      window.removeEventListener("scroll", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
   return (
     <main>
-      <Nav onDark />
+      <Nav />
 
-      {/* HERO — minimalist gallery */}
-      <section className="hero-gallery" aria-label="Introduction">
-        <HeroSlideshow />
-        
-        <div className="hero-gallery-content">
-          <div className="hero-gallery-brand">
-            <span className="brand-logo">Form <span className="amp">&amp;</span> Flavour</span>
+      {/* HERO — Bento Box */}
+      <section className="hero-bento" aria-label="Introduction">
+        <div className="hero-bento-grid wrap-wide">
+          <div className="bento-card bento-intro">
+            <span className="label hero-tag">Form &amp; Flavour Studio</span>
+            <h1 className="hero-title">
+              Crafted objects.<br /><span className="serif-italic" style={{ color: "var(--terra)" }}>Curated tastes.</span>
+            </h1>
+            <p className="hero-lead lead">
+              One London studio working across four disciplines. Each made slowly, by hand, with the same eye.
+            </p>
+            <div className="hero-actions">
+              <Link to="/contact" className="btn btn-terra">Start a project <Arrow /></Link>
+            </div>
           </div>
           
-          <div className="hero-gallery-footer">
-            <p className="hero-gallery-tagline">
-              One studio working across four crafts. Each made slowly, by hand, with the same eye.
-            </p>
-            <div className="scroll-cue hero-scroll" style={{ opacity: 1 }}><span className="line" /> Explore</div>
-          </div>
+          {CRAFTS.map((c, i) => (
+            <Link to={c.to} key={c.to} className={`bento-card bento-craft bento-craft-${i}`}>
+              <SmartImage src={c.img} alt={c.nm} className="bento-bg" />
+              <div className="bento-overlay">
+                <span className="bento-num">{c.n}</span>
+                <h2 className="bento-name">{c.nm}</h2>
+                <span className="bento-explore">Explore <Arrow s={14} /></span>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
