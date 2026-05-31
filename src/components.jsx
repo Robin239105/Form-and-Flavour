@@ -160,19 +160,21 @@ export function Nav({ onDark }) {
    ============================================================ */
 export function Footer() {
   return (
-    <footer className="footer">
-      <div className="wrap-wide">
-        <div className="footer-top">
-          <div>
-            <span className="label" style={{ color: "var(--terra-soft)" }}>Start a project</span>
-            <h2 style={{ marginTop: 18 }}>
-              Let's make<br /><span className="serif-italic">something</span> by hand.
-            </h2>
-            <Link to="/contact" className="btn btn-terra" style={{ marginTop: 30 }}>
-              Get in touch <Arrow />
+    <footer className="footer-cool">
+      <div className="footer-top wrap-wide">
+        <div className="footer-cta">
+          <Reveal as="span" className="label" style={{ color: "var(--terra-soft)" }}>Start a project</Reveal>
+          <Reveal as="h2" className="h1" style={{ marginTop: 24, fontSize: "clamp(3rem, 6vw, 5rem)" }}>
+            Let's make<br /><span className="serif-italic" style={{ color: "var(--terra)" }}>something</span> by hand.
+          </Reveal>
+          <Reveal style={{ marginTop: 40 }}>
+            <Link to="/contact" className="btn btn-terra btn-large">
+              Get in touch <Arrow s={18} />
             </Link>
-          </div>
-          <div>
+          </Reveal>
+        </div>
+        <div className="footer-links">
+          <div className="footer-col">
             <span className="label col-h">Studio</span>
             <div className="footer-nav">
               <Link to="/furniture">Upholstered Furniture</Link>
@@ -184,20 +186,24 @@ export function Footer() {
               <Link to="/about">About the Studio</Link>
             </div>
           </div>
-          <div>
+          <div className="footer-col">
             <span className="label col-h">Elsewhere</span>
             <div className="footer-nav">
               <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconInstagram s={16} /> Instagram</a>
               <a href="https://pinterest.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconPinterest s={16} /> Pinterest</a>
-              <a href="mailto:hello@formandflavour.studio" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconMail s={16} /> hello@formandflavour.studio</a>
-              <Link to="/contact" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><Arrow s={14} /> Booking enquiries</Link>
+              <a href="mailto:hello@formandflavour.studio" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconMail s={16} /> Email Us</a>
             </div>
           </div>
         </div>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Form &amp; Flavour Studio. Crafted objects. Curated tastes.</span>
-          <span>London · By appointment</span>
-        </div>
+      </div>
+      
+      <div className="footer-massive-brand" aria-hidden="true">
+        FORM &amp; FLAVOUR
+      </div>
+
+      <div className="footer-bottom wrap-wide">
+        <span>© {new Date().getFullYear()} Form &amp; Flavour Studio. All rights reserved.</span>
+        <span>London · By appointment</span>
       </div>
     </footer>
   );
