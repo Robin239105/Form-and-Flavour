@@ -4,7 +4,8 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Arrow, SmartImage, Reveal, Nav, Footer, usePageMeta, GalleryGrid } from "./components.jsx";
-import { U, CHOCOLATES, FURNITURE, JOURNAL_POSTS } from "./data.js";
+import { U, CHOCOLATES, FURNITURE, JOURNAL_POSTS, SHOP_ITEMS } from "./data.js";
+import { CartContext } from "./App.jsx";
 
 /* ---------- JOURNAL ---------- */
 export function Journal() {
@@ -92,42 +93,85 @@ export function JournalPost() {
 
 /* ---------- SHOP ---------- */
 export function Shop() {
-  usePageMeta("Shop — Form & Flavour Studio", "Purchase ready-to-ship artisan chocolates and small studio items.");
-  
-  const products = [
-    { ...CHOCOLATES[0], price: "£32" },
-    { ...CHOCOLATES[1], price: "£32" },
-    { ...CHOCOLATES[3], price: "£28" },
-    { ...CHOCOLATES[5], price: "£35" },
-  ];
+  usePageMeta("Shop — Form & Flavour Studio", "Purchase select painted chocolates and small goods directly from the studio.");
+  const { addToCart } = React.useContext(CartContext);
 
   return (
     <main>
       <Nav />
       <header className="pagehead wrap-wide">
         <Reveal as="span" className="eyebrow label">Store</Reveal>
-        <Reveal as="h1" className="h1" style={{ marginTop: 18 }}>Ready to Ship</Reveal>
-        <Reveal as="p" className="lead measure">Small batches of our signature painted chocolates, dispatched every Tuesday from our London studio.</Reveal>
+        <Reveal as="h1" className="h1" style={{ marginTop: 18 }}>The Studio Store</Reveal>
+        <Reveal as="p" className="lead measure">
+          Small batches of our signature painted chocolates, hand-picked textiles, and leather care accessories. 
+          Every item is crafted or sourced with the same attention to detail as our custom furniture.
+        </Reveal>
       </header>
 
+      {/* Product Grid Section */}
       <section className="section-tight wrap-wide">
-        <div className="crafts-grid">
-          {products.map((p, i) => (
-            <Reveal as="div" className="svc-card" key={p.id} delay={i * 50}>
-              <div className="svc-media">
-                <SmartImage src={p.img} alt={p.nm} ratio="1 / 1" />
+        <div className="grid-3" style={{ gap: "clamp(24px, 4vw, 48px)" }}>
+          {SHOP_ITEMS.map((item, i) => (
+            <Reveal as="div" className="svc-card" key={item.id} delay={i * 60} style={{ padding: "20px" }}>
+              <div className="svc-media" style={{ borderRadius: "10px", overflow: "hidden" }}>
+                <SmartImage src={item.img} alt={item.title} ratio="1 / 1" />
               </div>
-              <div style={{ marginTop: 16, display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                <h3 className="h3" style={{ fontSize: "1.2rem" }}>{p.nm}</h3>
-                <span style={{ fontFamily: "var(--serif)", fontWeight: 600 }}>{p.price}</span>
+              <div className="svc-body" style={{ display: "flex", flexDirection: "column", flex: 1, paddingTop: 16 }}>
+                <span className="label" style={{ color: "var(--terra)", fontSize: "0.7rem", marginBottom: 8, display: "block" }}>{item.col}</span>
+                <h3 className="h3" style={{ fontSize: "1.22rem", marginBottom: 12, minHeight: "2.4em", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.title}</h3>
+                
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "auto" }}>
+                  <span style={{ fontSize: "1.3rem", fontWeight: 700, fontFamily: "var(--serif)" }}>£{item.price}</span>
+                  <button className="btn btn-terra" style={{ padding: "10px 20px", fontSize: "0.72rem" }} onClick={() => addToCart(item)}>
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-              <span className="label" style={{ color: "var(--ink-soft)" }}>{p.col}</span>
-              <button className="btn btn-ghost" style={{ marginTop: 24, width: "100%", justifyContent: "center" }}>Add to Cart</button>
             </Reveal>
           ))}
         </div>
       </section>
 
+      {/* Value Proposition Section */}
+      <section className="section-tight wrap-wide" style={{ background: "var(--cream-2)", borderRadius: "18px", marginBlock: "40px", padding: "60px var(--gutter)" }}>
+        <div className="sec-head" style={{ marginBottom: 40 }}>
+          <div>
+            <Reveal as="span" className="eyebrow label">Studio Standards</Reveal>
+            <Reveal as="h2" className="h2" style={{ marginTop: 18 }}>Considered down to<br /><span className="serif-italic">the final thread.</span></Reveal>
+          </div>
+          <Reveal as="p" className="measure lead" style={{ fontSize: "1.05rem" }}>
+            We ship once a week on Tuesdays to ensure all chocolate orders are freshly cast, and all textiles are pressed and packaged to studio standards.
+          </Reveal>
+        </div>
+
+        <div className="grid-3" style={{ gap: "clamp(24px, 3vw, 40px)" }}>
+          <Reveal className="svc-card" style={{ background: "var(--cream)", border: "1px solid var(--cream-3)" }}>
+            <div style={{ borderRadius: "8px", overflow: "hidden", aspectRatio: "16 / 10", marginBottom: 20 }}>
+              <SmartImage src={U("1542843137-8791a6904d14", 600)} alt="Artisan chocolate production" />
+            </div>
+            <h3 className="h3" style={{ fontSize: "1.2rem", marginBottom: 10 }}>Weekly Small Batches</h3>
+            <p style={{ color: "var(--ink-soft)", fontSize: "0.95rem" }}>Our chocolates are tempered, cast, and hand-painted in tiny quantities. We use fresh dairy and premium single-origin cacao, resulting in a short but extraordinary shelf life.</p>
+          </Reveal>
+
+          <Reveal className="svc-card" style={{ background: "var(--cream)", border: "1px solid var(--cream-3)" }} delay={100}>
+            <div style={{ borderRadius: "8px", overflow: "hidden", aspectRatio: "16 / 10", marginBottom: 20 }}>
+              <SmartImage src={U("1586023492125-27b2c045efd7", 600)} alt="Studio textiles and canvas" />
+            </div>
+            <h3 className="h3" style={{ fontSize: "1.2rem", marginBottom: 10 }}>Bespoke Materials</h3>
+            <p style={{ color: "var(--ink-soft)", fontSize: "0.95rem" }}>From our Irish linens to our heavy cotton duck canvas, every textile piece is cut from remainder bolts of our furniture commissions, minimizing waste while sharing premium materials.</p>
+          </Reveal>
+
+          <Reveal className="svc-card" style={{ background: "var(--cream)", border: "1px solid var(--cream-3)" }} delay={200}>
+            <div style={{ borderRadius: "8px", overflow: "hidden", aspectRatio: "16 / 10", marginBottom: 20 }}>
+              <SmartImage src={U("1513635269975-59663e0ca1ad", 600)} alt="Insured delivery courier" />
+            </div>
+            <h3 className="h3" style={{ fontSize: "1.2rem", marginBottom: 10 }}>Insured & Tracked Courier</h3>
+            <p style={{ color: "var(--ink-soft)", fontSize: "0.95rem" }}>To prevent melting or damage, we ship all parcels in temperature-controlled, shock-absorbent packaging via overnight tracked courier. Free UK shipping on orders over £150.</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Commissions Promotion Section */}
       <section className="cta-band section">
         <div className="wrap" style={{ textAlign: "center" }}>
           <Reveal as="h2" className="h2" style={{ marginBottom: 20 }}>Looking for custom furniture?</Reveal>

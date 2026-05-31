@@ -19,7 +19,8 @@ import {
   CHOCOLATES,
   RECIPES,
   TOURS,
-  CRAFTS
+  CRAFTS,
+  JOURNAL_POSTS
 } from "./data.js";
 
 /* ---------- HOME ---------- */
@@ -118,8 +119,34 @@ export function Home() {
         </div>
       </section>
 
+      {/* PHILOSOPHY OF CRAFT */}
+      <section className="section-tight wrap-wide" style={{ borderTop: "1px solid var(--cream-3)", paddingTop: "clamp(64px, 9vw, 120px)" }}>
+        <div className="grid-2" style={{ alignItems: "center" }}>
+          <Reveal>
+            <span className="eyebrow label">Studio Philosophy</span>
+            <h2 className="h2" style={{ marginTop: 18, marginBottom: 24 }}>Patience over pace.<br /><span className="serif-italic">Detail over output.</span></h2>
+            <p className="lead" style={{ marginBottom: 20 }}>
+              We believe the world has enough fast-made, disposable things. Our work is an argument for the opposite — materials that feel good to touch, recipes that take days to test, and chairs that are hand-sprung to last two generations.
+            </p>
+            <p style={{ color: "var(--ink-soft)", marginBottom: 30 }}>
+              Whether tempering chocolate at 31°C or lashing upholstery coils with an 8-way knot, the goal is identical: quiet excellence that reveals itself slowly over time.
+            </p>
+            <Link to="/about" className="btn btn-ghost">Learn Our Approach <Arrow /></Link>
+          </Reveal>
+          <Reveal delay={120}>
+            <div style={{ position: "relative", borderRadius: 16, overflow: "hidden" }}>
+              <SmartImage src={U("1540518614846-7eded433c457", 1000)} alt="Bespoke interior and furniture details" ratio="4 / 5" />
+              <div style={{ position: "absolute", bottom: 24, left: 24, background: "rgba(247, 244, 237, 0.9)", backdropFilter: "blur(8px)", padding: "16px 24px", borderRadius: 8 }}>
+                <span className="kicker-num" style={{ fontSize: "0.8rem", display: "block" }}>VIGNETTE No. 12</span>
+                <strong style={{ fontSize: "1rem", fontFamily: "var(--serif)" }}>The Reading Corner</strong>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* FEATURED STRIP */}
-      <section className="section-tight wrap-wide">
+      <section className="section-tight wrap-wide" style={{ borderTop: "1px solid var(--cream-3)", paddingTop: "clamp(48px, 7vw, 96px)" }}>
         <div className="sec-head">
           <Reveal as="h2" className="h2">Selected work</Reveal>
           <Reveal as={Link} to="/furniture" className="tlink">See the furniture portfolio <Arrow s={15} /></Reveal>
@@ -135,6 +162,50 @@ export function Home() {
             </div>
           ))}
         </Reveal>
+      </section>
+
+      {/* STUDIO VIGNETTES */}
+      <section className="section wrap-wide" style={{ borderTop: "1px solid var(--cream-3)" }}>
+        <div className="sec-head">
+          <div>
+            <Reveal as="span" className="eyebrow label">The Workshop</Reveal>
+            <Reveal as="h2" className="h2" style={{ marginTop: 18 }}>Studio vignettes &amp;<br /><span className="serif-italic">material textures.</span></Reveal>
+          </div>
+          <Reveal as="p" className="measure lead" style={{ fontSize: "1.05rem" }}>
+            A close-up look at raw ingredients, tools, and work-in-progress on the benches of our East London workshop.
+          </Reveal>
+        </div>
+
+        <div className="grid-4" style={{ gap: "clamp(12px, 1.8vw, 24px)" }}>
+          <Reveal className="svc-card" style={{ padding: 10 }}>
+            <SmartImage src={U("1556910103-1c02745aae4d", 500)} alt="Kitchen prep and copper pans" ratio="1/1" />
+            <div style={{ paddingTop: 12, display: "flex", justifyContent: "space-between", fontSize: "0.85rem" }}>
+              <span style={{ fontWeight: 600 }}>01 · Copper Simmer</span>
+              <span style={{ color: "var(--ink-soft)" }}>Kitchen</span>
+            </div>
+          </Reveal>
+          <Reveal className="svc-card" style={{ padding: 10 }} delay={80}>
+            <SmartImage src={U("1586023492125-27b2c045efd7", 500)} alt="Upholstery shears and linen twine" ratio="1/1" />
+            <div style={{ paddingTop: 12, display: "flex", justifyContent: "space-between", fontSize: "0.85rem" }}>
+              <span style={{ fontWeight: 600 }}>02 · Shears &amp; Twine</span>
+              <span style={{ color: "var(--ink-soft)" }}>Upholstery</span>
+            </div>
+          </Reveal>
+          <Reveal className="svc-card" style={{ padding: 10 }} delay={160}>
+            <SmartImage src={U("1542843137-8791a6904d14", 500)} alt="Tempered dark chocolate mold" ratio="1/1" />
+            <div style={{ paddingTop: 12, display: "flex", justifyContent: "space-between", fontSize: "0.85rem" }}>
+              <span style={{ fontWeight: 600 }}>03 · Cast Cocoa Shells</span>
+              <span style={{ color: "var(--ink-soft)" }}>Chocolates</span>
+            </div>
+          </Reveal>
+          <Reveal className="svc-card" style={{ padding: 10 }} delay={240}>
+            <SmartImage src={U("1506501139174-099022df5260", 500)} alt="Cozy London pub window details" ratio="1/1" />
+            <div style={{ paddingTop: 12, display: "flex", justifyContent: "space-between", fontSize: "0.85rem" }}>
+              <span style={{ fontWeight: 600 }}>04 · Leaded Glass</span>
+              <span style={{ color: "var(--ink-soft)" }}>Tours</span>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* STORY TEASER */}
@@ -155,6 +226,31 @@ export function Home() {
             </p>
             <Link to="/about" className="btn btn-ghost-light" style={{ marginTop: 30 }}>Read the story <Arrow /></Link>
           </Reveal>
+        </div>
+      </section>
+
+      {/* FROM THE JOURNAL */}
+      <section className="section wrap-wide" style={{ borderTop: "1px solid var(--cream-3)", background: "var(--cream-2)", borderRadius: "18px", marginBlock: "60px", paddingBlock: "80px" }}>
+        <div className="sec-head" style={{ marginBottom: 48 }}>
+          <div>
+            <Reveal as="span" className="eyebrow label">Studio Notes</Reveal>
+            <Reveal as="h2" className="h2" style={{ marginTop: 18 }}>Behind the scenes<br /><span className="serif-italic">in the Journal.</span></Reveal>
+          </div>
+          <Reveal as={Link} to="/journal" className="tlink">Read all notes <Arrow s={15} /></Reveal>
+        </div>
+
+        <div className="grid-3" style={{ gap: "clamp(20px, 3vw, 40px)" }}>
+          {JOURNAL_POSTS.map((post, i) => (
+            <Reveal as="article" className="tour-card" key={post.id} delay={i * 90} style={{ background: "var(--cream)", paddingBottom: 20, borderRadius: 8, overflow: "hidden", boxShadow: "0 10px 30px rgba(0,0,0,0.02)" }}>
+              <SmartImage src={post.img} alt={post.title} ratio="16 / 10" />
+              <div style={{ padding: "20px 20px 0" }}>
+                <span className="label" style={{ color: "var(--ink-soft)", marginBottom: 10, display: "block" }}>{post.date}</span>
+                <h3 className="h3" style={{ fontSize: "1.2rem", marginBottom: 14, minHeight: "2.4em", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{post.title}</h3>
+                <p style={{ fontSize: "0.95rem", color: "var(--ink-soft)", marginBottom: 16 }}>{post.excerpt}</p>
+                <Link to={`/journal/${post.id}`} className="tlink">Read story <Arrow s={14} /></Link>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 

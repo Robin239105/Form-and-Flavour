@@ -1,8 +1,9 @@
 /* ============================================================
    COMPONENTS — Form & Flavour Studio
    ============================================================ */
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
+import { CartContext } from "./App.jsx";
 
 /* ---- icons ---- */
 export const Arrow = ({ s = 16 }) => (
@@ -102,6 +103,7 @@ export function Nav({ onDark }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const loc = useLocation();
+  const { cart, setCartOpen } = useContext(CartContext);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -129,6 +131,9 @@ export function Nav({ onDark }) {
                 {it.label}
               </NavLink>
             ))}
+            <button className="nav-link cart-btn" onClick={() => setCartOpen(true)}>
+              Cart ({cart.length})
+            </button>
             <NavLink to="/contact" className="nav-cta">Enquire</NavLink>
           </nav>
           <button className={`burger ${open ? "open" : ""}`} onClick={() => setOpen((o) => !o)} aria-label="Menu" aria-expanded={open}>
@@ -144,11 +149,131 @@ export function Nav({ onDark }) {
               {it.label}
             </NavLink>
           ))}
+          <button className="drawer-link cart-btn" style={{ display: "block", textAlign: "left", width: "100%", padding: 0 }} onClick={() => { setOpen(false); setCartOpen(true); }}>
+            Cart ({cart.length})
+          </button>
         </nav>
         <div className="drawer-foot">
           <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconInstagram s={16} /> Instagram</a>
           <a href="https://pinterest.com" target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconPinterest s={16} /> Pinterest</a>
           <a href="mailto:hello@formandflavour.studio" style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><IconMail s={16} /> Email</a>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   CART DRAWER
+   ============================================================ */
+export function CartDrawer() {
+  const { cart, cartOpen, setCartOpen, clearCart } = useContext(CartContext);
+  const [checkingOut, setCheckingOut] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [orderId, setOrderId] = useState("");
+
+  useEffect(() => {
+    if (cartOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [cartOpen]);
+
+  const total = cart.reduce((acc, it) => acc + (it.price || 0), 0);
+
+  const handleCheckout = () => {
+    setCheckingOut(true);
+    const orderNo = `FF-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    setTimeout(() => {
+      clearCart();
+      setCheckingOut(false);
+      setCartOpen(false);
+      setOrderId(orderNo);
+      setShowSuccess(true);
+    }, 1800);
+  };
+
+  return (
+    <>
+      <div className={`cart-overlay ${cartOpen ? "open" : ""}`} onClick={() => setCartOpen(false)} aria-hidden="true" />
+      <div className={`cart-drawer ${cartOpen ? "open" : ""}`} role="dialog" aria-modal="true" aria-label="Shopping Cart">
+        <header className="cart-head">
+          <h2 className="h3">Your Cart</h2>
+          <button className="cart-close" onClick={() => setCartOpen(false)} aria-label="Close cart">✕</button>
+        </header>
+
+        <div className="cart-body">
+          {cart.length === 0 ? (
+            <div className="cart-empty">
+              <p>Your cart is currently empty.</p>
+              <button className="tlink" onClick={() => setCartOpen(false)} style={{ marginTop: 20 }}>Continue shopping <Arrow s={14} /></button>
+            </div>
+          ) : (
+            <ul className="cart-list">
+              {cart.map((it, i) => (
+                <li key={i} className="cart-item">
+                  <div className="cart-item-img">
+                    <img src={it.img} alt={it.title} />
+                  </div>
+                  <div className="cart-item-info">
+                    <span className="cart-item-title">{it.title}</span>
+                    <span className="cart-item-price">£{it.price}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {cart.length > 0 && (
+          <footer className="cart-foot">
+            <div className="cart-total">
+              <span>Subtotal</span>
+              <span>£{total}</span>
+            </div>
+            <button className="btn btn-terra btn-full" onClick={handleCheckout} disabled={checkingOut}>
+              {checkingOut ? "Processing..." : "Checkout"}
+            </button>
+          </footer>
+        )}
+      </div>
+
+      {/* Checkout Success Modal */}
+      <div className={`checkout-modal-overlay ${showSuccess ? "open" : ""}`} onClick={() => setShowSuccess(false)} aria-hidden="true">
+        <div className="checkout-success-modal" onClick={(e) => e.stopPropagation()}>
+          <button className="lb-close" onClick={() => setShowSuccess(false)} aria-label="Close success message" style={{ top: 20, right: 20, width: 40, height: 40, fontSize: "1rem" }}>✕</button>
+          
+          <div className="checkout-success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </div>
+
+          <h2 className="h2" style={{ marginBottom: 12 }}>Order Confirmed</h2>
+          <span className="label" style={{ color: "var(--terra)", fontSize: "0.8rem", display: "block", marginBottom: 24 }}>Order: {orderId}</span>
+          
+          <p className="lead" style={{ fontSize: "1rem", marginBottom: 24, color: "var(--ink-soft)" }}>
+            Thank you for ordering from the studio. We have received your commission request and small goods purchase. 
+            A studio assistant will contact you in the next 24 hours to confirm your custom requirements and shipping details.
+          </p>
+
+          <div style={{ background: "var(--cream-2)", padding: 20, borderRadius: 8, textAlign: "left", marginBottom: 30, fontSize: "0.9rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+              <span style={{ color: "var(--ink-soft)" }}>Delivery Method</span>
+              <strong>Courier Insured</strong>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+              <span style={{ color: "var(--ink-soft)" }}>Dispatch Date</span>
+              <strong>Next Tuesday</strong>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "var(--ink-soft)" }}>Studio Status</span>
+              <strong style={{ color: "var(--terra)" }}>Crafting in Progress</strong>
+            </div>
+          </div>
+
+          <button className="btn btn-terra btn-full" onClick={() => setShowSuccess(false)}>
+            Return to Studio
+          </button>
         </div>
       </div>
     </>

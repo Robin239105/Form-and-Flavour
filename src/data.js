@@ -119,3 +119,14 @@ export const JOURNAL_POSTS = [
   { id: "painted-shell", title: "The Anatomy of a Painted Shell", date: "Aug 2025", img: U("1542843137-8791a6904d14"), excerpt: "How we achieve the vibrant, glossy finish on our chocolate bonbons using colored cocoa butter and precise temperature control." },
   { id: "rebuilding-reading-chair", title: "Rebuilding the Reading Chair", date: "Jun 2025", img: U("1493663284031-b7e3aefcae8e"), excerpt: "A step-by-step look at stripping down a mid-century frame and rebuilding it using traditional horsehair and coir." }
 ];
+
+/* ---- Shop Items ---- */
+export const SHOP_ITEMS = [
+  { id: "box-12", title: "Signature Box — 12 Pieces", price: 48, col: "Artisan Chocolates", img: U("1511381939415-e44015466834", 900) },
+  { id: "box-24", title: "Signature Box — 24 Pieces", price: 85, col: "Artisan Chocolates", img: U("1620023602161-0b534e3fc45a", 900) },
+  { id: "bar-dark", title: "70% Single Origin Bar", price: 12, col: "Madagascar Origin", img: U("1542843137-8791a6904d14", 900) },
+  { id: "care-kit", title: "Leather Care Kit", price: 35, col: "Furniture Accessories", img: U("1538688525198-9b88f6f53126", 900) },
+  { id: "linen-cushion", title: "Bespoke Linen Cushion Cover", price: 65, col: "Studio Textiles", img: U("1586023492125-27b2c045efd7", 900) },
+  { id: "studio-apron", title: "Studio Apron — Heavy Canvas", price: 55, col: "Studio Wear", img: U("1556911220-bff31c812dba", 900) }
+];
+
