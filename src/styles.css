@@ -17,9 +17,9 @@
   --cream-3:     #e2e8f0;   /* Slate 200 - border and division lines */
   --cocoa:       #64748b;   /* Slate 500 - muted slate accent */
   --cocoa-deep:  #475569;   /* Slate 600 - dark slate for captions */
-  --terra:       #4f46e5;   /* Indigo 600 - premium cobalt/indigo main brand color */
-  --terra-deep:  #3730a3;   /* Indigo 800 - dark indigo for buttons/links hover */
-  --terra-soft:  #818cf8;   /* Indigo 400 - soft indigo for dark-theme highlights */
+  --terra:       #c2593f;   /* Terracotta / Rust accent - rich and warm */
+  --terra-deep:  #963d27;   /* Deep Terracotta for hover */
+  --terra-soft:  #e2875e;   /* Soft warm clay/copper for dark-theme highlights */
   --ink:         #0f172a;   /* Slate 900 - dark slate for maximum text readability */
   --ink-soft:    #475569;   /* Slate 600 - readable secondary text */
 
@@ -244,8 +244,10 @@ p { margin: 0; text-wrap: pretty; }
   color: var(--cream);
   height: 64px;
 }
-.nav.on-dark { color: var(--cream); }
+.nav.on-dark { color: #ffffff; }
 .nav.on-dark.scrolled { color: var(--cream); }
+.nav.on-dark .nav-link { opacity: 0.95; }
+.nav.on-dark .nav-link:hover, .nav.on-dark .nav-link.active { opacity: 1; }
 /* while the mobile drawer is open, blend the bar into the plum */
 .nav.menu-open, .nav.menu-open.scrolled {
   background: transparent; border-color: transparent; box-shadow: none; color: var(--cream); backdrop-filter: none;
