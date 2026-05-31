@@ -93,6 +93,8 @@ const NAV_ITEMS = [
   { to: "/chocolates", label: "Chocolates" },
   { to: "/recipes", label: "Recipes" },
   { to: "/tours", label: "Tours" },
+  { to: "/journal", label: "Journal" },
+  { to: "/shop", label: "Shop" },
   { to: "/about", label: "About" },
 ];
 
@@ -177,6 +179,8 @@ export function Footer() {
               <Link to="/chocolates">Painted Chocolates</Link>
               <Link to="/recipes">Recipe Development</Link>
               <Link to="/tours">Food Tours &amp; Pub Crawls</Link>
+              <Link to="/journal">The Journal</Link>
+              <Link to="/shop">Shop</Link>
               <Link to="/about">About the Studio</Link>
             </div>
           </div>

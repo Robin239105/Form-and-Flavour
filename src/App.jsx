@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Home, Furniture, Chocolates } from "./pages1.jsx";
 import { Recipes, Tours, About, Contact } from "./pages2.jsx";
+import { Journal, Shop, Commissions } from "./pages3.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -26,6 +27,9 @@ function App() {
         <Route path="/tours" element={<Tours />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/journal" element={<Journal />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/commissions" element={<Commissions />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </HashRouter>

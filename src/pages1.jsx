@@ -72,35 +72,53 @@ export function Home() {
     <main>
       <Nav onDark />
 
-      {/* HERO — split editorial */}
-      <section className="hero" aria-label="Introduction" ref={heroRef}>
-        <div className="hero-copy">
-          <span className="label hero-tag">Form &amp; Flavour Studio — London</span>
-          <h1 className="hero-title" data-parallax-soft>
-            <span className="line-mask"><span className="line-in">Crafted</span></span>
-            <span className="line-mask"><span className="line-in">objects.</span></span>
-            <span className="line-mask"><span className="line-in serif-italic amp">Curated tastes.</span></span>
-          </h1>
-          <p className="hero-lead lead">
-            One studio working across four crafts — furniture, chocolate, the recipe and the table — each made
-            slowly, by hand, with the same eye.
-          </p>
-          <div className="hero-actions">
-            <Link to="/furniture" className="btn btn-terra">See the work <Arrow /></Link>
-            <Link to="/contact" className="tlink tlink-light">Start a project <Arrow s={15} /></Link>
+      {/* HERO — dynamic immersive */}
+      <section className="hero-immersive" aria-label="Introduction">
+        <div className="hero-immersive-bgs">
+          <SmartImage src={CRAFTS[0].img} alt={CRAFTS[0].nm} className="hero-bg-layer" />
+          <SmartImage src={CRAFTS[1].img} alt={CRAFTS[1].nm} className="hero-bg-layer" />
+          <SmartImage src={CRAFTS[2].img} alt={CRAFTS[2].nm} className="hero-bg-layer" />
+          <SmartImage src={CRAFTS[3].img} alt={CRAFTS[3].nm} className="hero-bg-layer" />
+          <div className="hero-immersive-overlay" />
+        </div>
+        
+        <div className="hero-immersive-content">
+          <div className="hero-immersive-header">
+            <span className="label hero-tag">Form &amp; Flavour Studio — London</span>
+            <p className="hero-lead lead">
+              One studio working across four crafts. Each made slowly, by hand, with the same eye.
+            </p>
+          </div>
+          
+          <div className="hero-immersive-nav">
+            {CRAFTS.map((c, i) => (
+              <Link 
+                key={c.to} 
+                to={c.to} 
+                className="hero-craft-link"
+                onMouseEnter={() => {
+                  const layers = document.querySelectorAll('.hero-bg-layer');
+                  layers.forEach((l, idx) => {
+                    if (idx === i) l.classList.add('active');
+                    else l.classList.remove('active');
+                  });
+                }}
+                onMouseLeave={() => {
+                  const layers = document.querySelectorAll('.hero-bg-layer');
+                  layers.forEach(l => l.classList.remove('active'));
+                }}
+              >
+                <span className="num">{c.n}</span>
+                <h2 className="hero-title">{c.nm}</h2>
+              </Link>
+            ))}
+          </div>
+          
+          <div className="hero-immersive-footer">
+            <Link to="/contact" className="btn btn-terra">Start a project <Arrow /></Link>
+            <div className="scroll-cue hero-scroll"><span className="line" /> Explore the studio</div>
           </div>
         </div>
-        <div className="hero-figure">
-          <div className="hero-bg" data-parallax>
-            <SmartImage src={U("1493663284031-b7e3aefcae8e", 1500)} alt="A handcrafted chair in a sunlit studio interior" label="Form & Flavour Studio" />
-          </div>
-          <div className="hero-grain" aria-hidden="true"></div>
-          <div className="hero-fig-cap">
-            <span className="kicker-num">01 / 04</span>
-            <span>Reading Chair, reupholstered — reclaimed leather</span>
-          </div>
-        </div>
-        <div className="scroll-cue hero-scroll"><span className="line" /> Scroll</div>
       </section>
 
       {/* FOUR CRAFTS */}
@@ -198,10 +216,64 @@ export function Furniture() {
           <div className="stat"><div className="k">Traditional</div><div className="l">Sprung &amp; stuffed</div></div>
         </Reveal>
       </header>
+
+      {/* Expanded Content: Process */}
       <section className="section-tight wrap-wide">
+        <div className="grid-2">
+          <Reveal>
+            <h2 className="h2" style={{ marginBottom: 24 }}>The Upholstery Process</h2>
+            <p className="lead" style={{ marginBottom: 16 }}>
+              We do not cut corners. A true piece of upholstered furniture is built from the inside out, 
+              focusing on the frame, the springs, the stuffing, and finally, the cover.
+            </p>
+            <ul className="tour-incl">
+              <li><strong>Frame Assessment:</strong> Every antique frame is stripped to the bare wood, glued, and reinforced.</li>
+              <li><strong>Springing:</strong> Traditional copper cone springs, hand-lashed with eight-way ties for longevity.</li>
+              <li><strong>Stuffing:</strong> Horsehair, coir, and wool layering, entirely avoiding synthetic foams where possible.</li>
+              <li><strong>Finishing:</strong> Hand-stitched edges, precise pattern matching, and hand-tacked detailing.</li>
+            </ul>
+          </Reveal>
+          <Reveal delay={100}>
+            <SmartImage src={U("1586023492125-27b2c045efd7")} alt="Upholstery tools and fabric" ratio="4 / 3" />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Expanded Content: Materials */}
+      <section className="section-tight wrap-wide" style={{ background: "var(--cream-2)", padding: "clamp(48px, 7vw, 96px)" }}>
+        <Reveal as="h2" className="h2" style={{ textAlign: "center", marginBottom: 48 }}>Materials Library</Reveal>
+        <div className="grid-3">
+          <Reveal className="svc-card">
+            <h3 className="h3">Mohair Velvet</h3>
+            <p style={{ marginTop: 12, color: "var(--ink-soft)" }}>Sourced from traditional mills, mohair provides an unmatched depth of color and incredible durability for high-traffic lounge chairs.</p>
+          </Reveal>
+          <Reveal className="svc-card" delay={100}>
+            <h3 className="h3">Heavy Linen</h3>
+            <p style={{ marginTop: 12, color: "var(--ink-soft)" }}>Washed Belgian linens that drape beautifully and soften over time. Perfect for relaxed settees and slipcovers.</p>
+          </Reveal>
+          <Reveal className="svc-card" delay={200}>
+            <h3 className="h3">Vegetable Tanned Leather</h3>
+            <p style={{ marginTop: 12, color: "var(--ink-soft)" }}>Thick, aromatic hides that patinate beautifully. We source from Italian and British tanneries committed to traditional pit tanning.</p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section wrap-wide">
+        <div className="sec-head">
+          <h2 className="h2">Selected Pieces</h2>
+        </div>
         <p className="label" style={{ color: "var(--ink-soft)", marginBottom: 24 }}>Click any piece to view it larger</p>
         <GalleryGrid items={FURNITURE} variant="masonry" />
       </section>
+      
+      {/* Commission CTA */}
+      <section className="cta-band section">
+        <div className="wrap">
+          <Reveal as="h2" className="h2" style={{ margin: "0 auto 28px", maxWidth: "20ch" }}>Commission a custom piece or request a reupholstery quote.</Reveal>
+          <Reveal as={Link} to="/contact" className="btn btn-ghost-light">Start a project <Arrow /></Reveal>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );
@@ -227,7 +299,33 @@ export function Chocolates() {
           less like confectionery and more like a set of small, edible paintings.
         </Reveal>
       </header>
+
+      {/* Expanded Content: Painting & Flavour Profiles */}
       <section className="section-tight wrap-wide">
+        <div className="grid-2">
+          <Reveal delay={100}>
+            <SmartImage src={U("1542843137-8791a6904d14")} alt="Painting chocolate moulds" ratio="4 / 3" />
+          </Reveal>
+          <Reveal>
+            <h2 className="h2" style={{ marginBottom: 24 }}>The Painting Process</h2>
+            <p className="lead" style={{ marginBottom: 16 }}>
+              Our chocolates are tempered and cast by hand in small batches. 
+              Before the chocolate is poured, each mould is individually painted with naturally coloured cocoa butters.
+            </p>
+            <h3 className="h3" style={{ marginTop: 30, marginBottom: 16 }}>Signature Flavour Profiles</h3>
+            <ul className="tour-incl">
+              <li><strong>The Orchard Collection:</strong> Bright, acidic fruit notes like yuzu, green apple, and preserved quince.</li>
+              <li><strong>Autumn Editions:</strong> Deep, warming flavours including smoked sea salt caramel, hazelnut praline, and burnt honey.</li>
+              <li><strong>Midnight Series:</strong> Intense, dark profiles featuring single-origin 70% cacao, saffron, and aged rum ganache.</li>
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section wrap-wide">
+        <div className="sec-head">
+          <h2 className="h2">The Collections</h2>
+        </div>
         <Reveal className="collrow">
           {collections.map((c) => (
             <button key={c} className={`tag collchip ${active === c ? "active" : ""}`} onClick={() => setActive(c)}>{c}</button>
@@ -235,6 +333,19 @@ export function Chocolates() {
         </Reveal>
         <GalleryGrid key={active} items={shown} variant="even" />
       </section>
+
+      {/* Expanded Content: Corporate Gifting */}
+      <section className="section-tight wrap-wide" style={{ background: "var(--cream-2)", padding: "clamp(48px, 7vw, 96px)" }}>
+        <div className="wrap" style={{ textAlign: "center" }}>
+          <Reveal as="h2" className="h2" style={{ marginBottom: 20 }}>Corporate &amp; Event Gifting</Reveal>
+          <Reveal as="p" className="lead measure" style={{ margin: "0 auto 30px" }}>
+            We provide bespoke boxes for private dinners, press events, and corporate gifting. 
+            Custom colorways can be developed to match your brand identity, alongside tailored flavour profiles.
+          </Reveal>
+          <Reveal as={Link} to="/contact" className="btn btn-terra">Enquire about gifting <Arrow /></Reveal>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

@@ -109,6 +109,25 @@ export function Tours() {
         </div>
       </section>
 
+      {/* Expanded Content: Tours FAQ */}
+      <section className="section-tight wrap-wide">
+        <Reveal as="h2" className="h2" style={{ marginBottom: 30 }}>Frequently Asked Questions</Reveal>
+        <div className="grid-2">
+          <Reveal>
+            <h3 className="h3">How large are the tour groups?</h3>
+            <p className="lead" style={{ marginBottom: 24, fontSize: "1rem" }}>We keep public tours strictly capped at 8 people to ensure everyone can hear the stories, ask questions, and comfortably fit into small historic pubs or market stalls.</p>
+            <h3 className="h3">Do you cater to dietary requirements?</h3>
+            <p className="lead" style={{ fontSize: "1rem" }}>Yes. With 48 hours notice, we can accommodate most dietary requirements (including vegetarian, vegan, and gluten-free) across all our food and drink stops.</p>
+          </Reveal>
+          <Reveal delay={100}>
+            <h3 className="h3">What happens if it rains?</h3>
+            <p className="lead" style={{ marginBottom: 24, fontSize: "1rem" }}>The tours run rain or shine. In true London fashion, we recommend an umbrella and good walking shoes. We adjust the route slightly to maximize time indoors when the weather turns.</p>
+            <h3 className="h3">Can I book a private tour for a corporate event?</h3>
+            <p className="lead" style={{ fontSize: "1rem" }}>Absolutely. Private bookings can be tailored for corporate team-building or private celebrations. Contact us directly to arrange a bespoke route.</p>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="story section">
         <div className="wrap" style={{ textAlign: "center" }}>
           <Reveal as="span" className="label" style={{ color: "var(--terra-soft)" }}>Booking enquiries</Reveal>
