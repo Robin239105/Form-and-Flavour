@@ -112,3 +112,10 @@ export const CRAFTS = [
   { n: "03", to: "/recipes", nm: "Recipe Development", sub: "Dishes and product lines, built from the idea up.", img: U("1490645935967-10de6ba17061", 900) },
   { n: "04", to: "/tours", nm: "Food Tours & Pub Crawls", sub: "The city, tasted slowly and on foot.", img: U("1514933651103-005eec06c04b", 900) },
 ];
+
+/* ---- Journal Posts ---- */
+export const JOURNAL_POSTS = [
+  { id: "sourcing-mohair", title: "Sourcing Mohair in Yorkshire", date: "Oct 2025", img: U("1586023492125-27b2c045efd7"), excerpt: "A trip to one of the last remaining traditional mohair velvet mills in the north of England, exploring their century-old looms." },
+  { id: "painted-shell", title: "The Anatomy of a Painted Shell", date: "Aug 2025", img: U("1542843137-8791a6904d14"), excerpt: "How we achieve the vibrant, glossy finish on our chocolate bonbons using colored cocoa butter and precise temperature control." },
+  { id: "rebuilding-reading-chair", title: "Rebuilding the Reading Chair", date: "Jun 2025", img: U("1493663284031-b7e3aefcae8e"), excerpt: "A step-by-step look at stripping down a mid-century frame and rebuilding it using traditional horsehair and coir." }
+];

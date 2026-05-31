@@ -2,18 +2,13 @@
    PAGES — Journal · Shop · Commissions
    ============================================================ */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Arrow, SmartImage, Reveal, Nav, Footer, usePageMeta, GalleryGrid } from "./components.jsx";
-import { U, CHOCOLATES, FURNITURE } from "./data.js";
+import { U, CHOCOLATES, FURNITURE, JOURNAL_POSTS } from "./data.js";
 
 /* ---------- JOURNAL ---------- */
 export function Journal() {
   usePageMeta("Journal — Form & Flavour Studio", "Behind the scenes, material sourcing, and stories from the studio.");
-  const posts = [
-    { id: 1, title: "Sourcing Mohair in Yorkshire", date: "Oct 2025", img: U("1586023492125-27b2c045efd7"), excerpt: "A trip to one of the last remaining traditional mohair velvet mills in the north of England, exploring their century-old looms." },
-    { id: 2, title: "The Anatomy of a Painted Shell", date: "Aug 2025", img: U("1542843137-8791a6904d14"), excerpt: "How we achieve the vibrant, glossy finish on our chocolate bonbons using colored cocoa butter and precise temperature control." },
-    { id: 3, title: "Rebuilding the Reading Chair", date: "Jun 2025", img: U("1493663284031-b7e3aefcae8e"), excerpt: "A step-by-step look at stripping down a mid-century frame and rebuilding it using traditional horsehair and coir." }
-  ];
 
   return (
     <main>
@@ -26,19 +21,70 @@ export function Journal() {
 
       <section className="section-tight wrap-wide">
         <div className="grid-2">
-          {posts.map((p, i) => (
+          {JOURNAL_POSTS.map((p, i) => (
             <Reveal as="article" className="tour-card" key={p.id} delay={i * 100} style={{ paddingBottom: 24 }}>
               <SmartImage src={p.img} alt={p.title} ratio="16 / 9" />
               <div style={{ padding: "20px 20px 0" }}>
                 <span className="label" style={{ color: "var(--ink-soft)", marginBottom: 12, display: "block" }}>{p.date}</span>
                 <h2 className="h3" style={{ marginBottom: 16 }}>{p.title}</h2>
                 <p>{p.excerpt}</p>
-                <Link to="#" className="tlink" style={{ marginTop: 20 }}>Read full story <Arrow s={15} /></Link>
+                <Link to={`/journal/${p.id}`} className="tlink" style={{ marginTop: 20 }}>Read full story <Arrow s={15} /></Link>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
+      <Footer />
+    </main>
+  );
+}
+
+/* ---------- JOURNAL POST (Single Page) ---------- */
+export function JournalPost() {
+  const { id } = useParams();
+  const post = JOURNAL_POSTS.find(p => p.id === id);
+
+  usePageMeta(
+    post ? `${post.title} — Journal` : "Post Not Found",
+    post ? post.excerpt : "Journal post"
+  );
+
+  if (!post) {
+    return (
+      <main>
+        <Nav />
+        <section className="section wrap" style={{ textAlign: "center", paddingTop: "20vh" }}>
+          <h1 className="h2">Post not found</h1>
+          <Link to="/journal" className="btn btn-terra" style={{ marginTop: 20 }}>Return to Journal</Link>
+        </section>
+      </main>
+    );
+  }
+
+  return (
+    <main>
+      <Nav />
+      <article className="section-tight wrap">
+        <Reveal as="span" className="label" style={{ color: "var(--ink-soft)" }}>{post.date}</Reveal>
+        <Reveal as="h1" className="h1" style={{ margin: "20px 0 30px" }}>{post.title}</Reveal>
+        <Reveal>
+          <SmartImage src={post.img} alt={post.title} ratio="16 / 9" style={{ marginBottom: 40 }} />
+        </Reveal>
+        <Reveal className="lead measure">
+          <p>{post.excerpt}</p>
+          <p style={{ marginTop: 20 }}>
+            This is a full article view for <strong>{post.title}</strong>. 
+            The studio's approach to craftsmanship means looking closely at every single detail. Whether it's weaving fabric, tempering chocolate, or testing recipes, nothing happens quickly.
+          </p>
+          <p style={{ marginTop: 20 }}>
+            We document these processes because we believe that understanding how something is made significantly increases the joy of living with it. 
+          </p>
+        </Reveal>
+        
+        <Reveal style={{ marginTop: 60, paddingTop: 40, borderTop: "1px solid var(--cream-3)" }}>
+          <Link to="/journal" className="tlink"><Arrow s={15} style={{ transform: "rotate(180deg)", marginRight: 8 }} /> Back to Journal</Link>
+        </Reveal>
+      </article>
       <Footer />
     </main>
   );

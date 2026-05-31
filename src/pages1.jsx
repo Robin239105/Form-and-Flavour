@@ -22,6 +22,32 @@ import {
   CRAFTS
 } from "./data.js";
 
+function HeroSlideshow() {
+  const [idx, setIdx] = React.useState(0);
+  
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setIdx((prev) => (prev + 1) % CRAFTS.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="hero-gallery-bgs">
+      {CRAFTS.map((c, i) => (
+        <div 
+          key={c.to} 
+          className={`hero-bg-layer ${i === idx ? "active" : ""}`}
+        >
+          <SmartImage src={c.img} alt={c.nm} />
+        </div>
+      ))}
+      <div className="hero-gallery-overlay" />
+    </div>
+  );
+}
+
+
 /* ---------- HOME ---------- */
 export function Home() {
   usePageMeta(
@@ -72,51 +98,20 @@ export function Home() {
     <main>
       <Nav onDark />
 
-      {/* HERO — dynamic immersive */}
-      <section className="hero-immersive" aria-label="Introduction">
-        <div className="hero-immersive-bgs">
-          <SmartImage src={CRAFTS[0].img} alt={CRAFTS[0].nm} className="hero-bg-layer" />
-          <SmartImage src={CRAFTS[1].img} alt={CRAFTS[1].nm} className="hero-bg-layer" />
-          <SmartImage src={CRAFTS[2].img} alt={CRAFTS[2].nm} className="hero-bg-layer" />
-          <SmartImage src={CRAFTS[3].img} alt={CRAFTS[3].nm} className="hero-bg-layer" />
-          <div className="hero-immersive-overlay" />
-        </div>
+      {/* HERO — minimalist gallery */}
+      <section className="hero-gallery" aria-label="Introduction">
+        <HeroSlideshow />
         
-        <div className="hero-immersive-content">
-          <div className="hero-immersive-header">
-            <span className="label hero-tag">Form &amp; Flavour Studio — London</span>
-            <p className="hero-lead lead">
+        <div className="hero-gallery-content">
+          <div className="hero-gallery-brand">
+            <span className="brand-logo">Form <span className="amp">&amp;</span> Flavour</span>
+          </div>
+          
+          <div className="hero-gallery-footer">
+            <p className="hero-gallery-tagline">
               One studio working across four crafts. Each made slowly, by hand, with the same eye.
             </p>
-          </div>
-          
-          <div className="hero-immersive-nav">
-            {CRAFTS.map((c, i) => (
-              <Link 
-                key={c.to} 
-                to={c.to} 
-                className="hero-craft-link"
-                onMouseEnter={() => {
-                  const layers = document.querySelectorAll('.hero-bg-layer');
-                  layers.forEach((l, idx) => {
-                    if (idx === i) l.classList.add('active');
-                    else l.classList.remove('active');
-                  });
-                }}
-                onMouseLeave={() => {
-                  const layers = document.querySelectorAll('.hero-bg-layer');
-                  layers.forEach(l => l.classList.remove('active'));
-                }}
-              >
-                <span className="num">{c.n}</span>
-                <h2 className="hero-title">{c.nm}</h2>
-              </Link>
-            ))}
-          </div>
-          
-          <div className="hero-immersive-footer">
-            <Link to="/contact" className="btn btn-terra">Start a project <Arrow /></Link>
-            <div className="scroll-cue hero-scroll"><span className="line" /> Explore the studio</div>
+            <div className="scroll-cue hero-scroll" style={{ opacity: 1 }}><span className="line" /> Explore</div>
           </div>
         </div>
       </section>
