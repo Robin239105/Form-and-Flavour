@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* ============================================================
    APP — router, scroll restoration, cart context
    ============================================================ */
